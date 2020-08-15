@@ -42,5 +42,26 @@
             <button class="form-submit">Đăng ký</button>
         </form>     
     </div>
+    <script src="./assets/js/validator.js"></script>
+    <script>
+        // Output want
+        Validator({
+            form: '#form-1',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#fullname'),
+                Validator.isEmail('#email'),
+                Validator.minLength('#password',6),
+                Validator.isRequired('#password_confirmation'),
+                Validator.isConfirmed('#password_confirmation', function () {
+                    return document.querySelector('#form-1 #password').value;
+                }, 'Mật khẩu nhập lại không chính xác'),
+            ],
+            onSubmit: function(data) {
+                // call API
+                console.log(data);
+            }
+        })
+    </script>
 </body>
 </html>
